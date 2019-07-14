@@ -1,0 +1,15 @@
+{
+  "name": "flickr-stats",
+  "version": "1.0.0",
+  "description": "shows most used leneses etc of a flickr user",
+  "main": "index.js",
+  "scripts": {
+    "scss": "node-sass --watch scss -o css"
+  },
+  "author": "Alexander Ehrenhöfer",
+  "license": "ISC",
+  "dependencies": {
+    "node-sass": "^4.12.0",
+    "sass": "^1.22.3"
+  }
+}
