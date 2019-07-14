@@ -1,6 +1,7 @@
 import { getUrlParameter, getUserId } from './utils.js'
 import { getUserPhotos, getPhotoExif, getUserInfo } from './restClient.js'
 import { DataAnalyser } from './dataAnalyser.js'
+import { updateLoadingBar } from './ui.js'
 
 let photos = []
 let user
@@ -8,10 +9,18 @@ let user
 async function initAnalysis() {
   let userId = getUserId()
 
+  if (!userId) {
+    return
+  }
+
   await processUser(userId)
 
   await processPhotos(userId)
   renderPhotoData()
+
+  $('.loading-container').addClass('hidden')
+  $('.header').toggleClass('align-center', 'align-left')
+  $('.container').removeClass('hidden')
 }
 
 /* 
@@ -27,6 +36,7 @@ async function processPhotos (userId) {
   for (let photo of photosResponse.photos.photo) {
     i++;
     console.log(`get photo ${i} / ${photosResponse.photos.photo.length}`)
+    updateLoadingBar(i, photosResponse.photos.photo.length)
     let enrichedPhoto = await getPhotoExif(photo.id)
     photos.push(enrichedPhoto)
   }

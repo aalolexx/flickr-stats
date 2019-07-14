@@ -1,3 +1,11 @@
+/* Widths and spaces */
 $container-max-width: 1000px;
-
 $components-spacing: 3rem;
+
+/* Colors */
+$color-blue: rgba(41,196,255,1);
+$color-pink: rgba(255,158,211,1);
+$color-orange: rgba(255,182,138,1);
+$color-gray: #eee;
+
+$primary-gradient: linear-gradient( 75.2deg,  $color-blue -2.5%, $color-pink 55%, $color-orange 102.3% );

@@ -8,3 +8,17 @@ body {
   max-width: $container-max-width;
   margin: auto;
 }
+
+.hidden {
+  display: none;
+}
+
+.align-left {
+  text-align: left;
+}
+.align-center {
+  text-align: center;
+}
+.align-right {
+  text-align: center;
+}

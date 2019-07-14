@@ -1,3 +1,5 @@
+/* Widths and spaces */
+/* Colors */
 body {
   font-size: 20px; }
 
@@ -13,9 +15,39 @@ body {
   max-width: 1000px;
   margin: auto; }
 
+.hidden {
+  display: none; }
+
+.align-left {
+  text-align: left; }
+
+.align-center {
+  text-align: center; }
+
+.align-right {
+  text-align: center; }
+
 .header {
   margin-bottom: 3rem; }
   .header h1 {
     margin-bottom: 0; }
   .header p {
     margin: 0; }
+
+.loading-container {
+  width: 100%;
+  max-width: 30rem;
+  margin: auto;
+  text-align: center;
+  margin-top: 20vh; }
+  .loading-container .loading-bar, .loading-container .loading-bar-wrapper {
+    height: 1rem;
+    border-radius: 1rem; }
+  .loading-container .loading-bar-wrapper {
+    background-color: #eee; }
+  .loading-container .loading-bar {
+    background: linear-gradient(75.2deg, #29c4ff -2.5%, #ff9ed3 55%, #ffb68a 102.3%);
+    transition: 0.2s ease all;
+    min-width: 5%; }
+  .loading-container .js-loading-bar {
+    width: 0%; }
