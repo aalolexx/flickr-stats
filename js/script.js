@@ -1,10 +1,26 @@
-import { getUserPhotos, getPhotoExif } from './restClient.js'
+import { getUrlParameter, getUserId } from './utils.js'
+import { getUserPhotos, getPhotoExif, getUserInfo } from './restClient.js'
 import { DataAnalyser } from './dataAnalyser.js'
 
+let photos = []
+let user
 
 async function initAnalysis() {
-  let photosResponse = await getUserPhotos('144541346@N03')
-  let photos = []
+  let userId = getUserId()
+
+  await processUser(userId)
+
+  await processPhotos(userId)
+  renderPhotoData()
+}
+
+/* 
+--------------------
+Processing Methods
+--------------------
+*/
+async function processPhotos (userId) {
+  let photosResponse = await getUserPhotos(userId)
 
   // Loop trough all photos and add exif data to them
   let i = 0;
@@ -16,7 +32,20 @@ async function initAnalysis() {
   }
 
   console.log(photos)
+}
 
+async function processUser (userId) {
+  let userResponse = await getUserInfo(userId)
+  user = userResponse.person
+}
+
+
+/* 
+--------------------
+Render Methods
+--------------------
+*/
+function renderPhotoData () {
   // Create the data analyser object
   let dataHouse = new DataAnalyser(photos)
   console.log('lense:')
@@ -33,7 +62,6 @@ async function initAnalysis() {
   console.log(dataHouse.getFNumberRanking())
   console.log('focal length:')
   console.log(dataHouse.getFocalLengthRanking())
-
 }
 
 initAnalysis()

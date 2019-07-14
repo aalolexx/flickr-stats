@@ -42,3 +42,10 @@ export async function getUserPhotos(userId) {
     value: userId
   }])
 }
+
+export async function getUserInfo(userId) {
+  return await getFromURL('flickr.people.getInfo', [{
+    key: 'user_id',
+    value: userId
+  }])
+} 
