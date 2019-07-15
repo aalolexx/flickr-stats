@@ -55,6 +55,7 @@ export class DataAnalyser {
         this.getExifByTag(photo.photo.exif, propKey)
       )
     }
+    console.log(exifArray)
     return exifArray
   }
 

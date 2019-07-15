@@ -1,7 +1,7 @@
 import { getUrlParameter, getUserId } from './utils.js'
 import { getUserPhotos, getPhotoExif, getUserInfo } from './restClient.js'
 import { DataAnalyser } from './dataAnalyser.js'
-import { updateLoadingBar } from './ui.js'
+import { updateLoadingBar, showSummary, showUserHeader } from './ui.js'
 
 let photos = []
 let user
@@ -32,9 +32,12 @@ async function processPhotos (userId) {
   let photosResponse = await getUserPhotos(userId)
 
   // Loop trough all photos and add exif data to them
-  let i = 0;
+  let i = 0; 
   for (let photo of photosResponse.photos.photo) {
     i++;
+    if (i > 2) {
+      continue
+    } // todo aeh remove
     console.log(`get photo ${i} / ${photosResponse.photos.photo.length}`)
     updateLoadingBar(i, photosResponse.photos.photo.length)
     let enrichedPhoto = await getPhotoExif(photo.id)
@@ -58,6 +61,22 @@ Render Methods
 function renderPhotoData () {
   // Create the data analyser object
   let dataHouse = new DataAnalyser(photos)
+
+  showUserHeader(
+    user.realname._content,
+    user.username._content
+  )
+
+  showSummary(
+    user.realname._content,
+    dataHouse.getCameraMakeRanking().keys().next().value,
+    dataHouse.getLenseRanking().keys().next().value,
+    dataHouse.getFNumberRanking().keys().next().value,
+    dataHouse.getIsoRanking().keys().next().value,
+    dataHouse.getExposureTimeRanking().keys().next().value,
+  )
+  console.log(user)
+  
   console.log('lense:')
   console.log(dataHouse.getLenseRanking())
   console.log('camera model:')

@@ -1,13 +1,22 @@
 /* Widths and spaces */
 /* Colors */
-body {
-  font-size: 20px; }
-
-h1 {
-  font-size: 3rem; }
+html {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+  font-weight: 400; }
 
 body {
   font-family: 'Rubik', sans-serif;
+  font-size: 20px; }
+
+h1 {
+  font-size: 4rem; }
+
+h2 {
+  font-size: 2.75rem; }
+
+body {
   margin: 0;
   padding: 0; }
 
@@ -28,11 +37,24 @@ body {
   text-align: center; }
 
 .header {
-  margin-bottom: 3rem; }
+  margin-bottom: 3rem;
+  transition: 0.3s ease; }
   .header h1 {
     margin-bottom: 0; }
   .header p {
     margin: 0; }
+
+/* Quick Showcase */
+.data-quick-showcase {
+  font-size: 2rem;
+  margin-bottom: 3rem; }
+  .data-quick-showcase span {
+    font-weight: bold;
+    color: #29c4ff;
+    background: linear-gradient(75.2deg, #29c4ff -2.5%, #ff9ed3 55%, #ffb68a 102.3%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent; }
 
 .loading-container {
   width: 100%;
@@ -47,7 +69,7 @@ body {
     background-color: #eee; }
   .loading-container .loading-bar {
     background: linear-gradient(75.2deg, #29c4ff -2.5%, #ff9ed3 55%, #ffb68a 102.3%);
-    transition: 0.2s ease all;
+    transition: 0.2s ease;
     min-width: 5%; }
   .loading-container .js-loading-bar {
     width: 0%; }

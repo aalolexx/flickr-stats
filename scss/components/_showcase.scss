@@ -1,0 +1,14 @@
+/* Quick Showcase */
+.data-quick-showcase {
+  font-size: 2rem;
+  margin-bottom: $components-spacing;
+
+  span {
+    font-weight: bold;
+    color: $color-blue; // Fallback 
+    background: $primary-gradient;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
