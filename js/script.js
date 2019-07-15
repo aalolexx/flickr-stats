@@ -35,9 +35,6 @@ async function processPhotos (userId) {
   let i = 0; 
   for (let photo of photosResponse.photos.photo) {
     i++;
-    if (i > 2) {
-      continue
-    } // todo aeh remove
     console.log(`get photo ${i} / ${photosResponse.photos.photo.length}`)
     updateLoadingBar(i, photosResponse.photos.photo.length)
     let enrichedPhoto = await getPhotoExif(photo.id)
@@ -63,12 +60,12 @@ function renderPhotoData () {
   let dataHouse = new DataAnalyser(photos)
 
   showUserHeader(
-    user.realname._content,
-    user.username._content
+    user.realname ? user.realname._content : undefined,
+    user.username ? user.username._content : undefined 
   )
 
   showSummary(
-    user.realname._content,
+    user.realname ? user.realname._content : user.username._content,
     dataHouse.getCameraMakeRanking().keys().next().value,
     dataHouse.getLenseRanking().keys().next().value,
     dataHouse.getFNumberRanking().keys().next().value,

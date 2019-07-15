@@ -1,6 +1,21 @@
 export class DataAnalyser {
   constructor (photos) {
     this.photos = photos
+    this.filterInvalidEntries()
+  }
+
+  filterInvalidEntries () {
+    let i = 0;
+    for (let photo of this.photos) {
+      //this.getExifByTag(photo.photo.exif, propKey)
+      let exif = this.getExifByTag(photo.photo.exif, 'FNumber')
+      if (exif) {
+        if (exif.raw._content == 0) {
+          this.photos.splice(i, 1)
+        }
+      }
+      i++
+    }
   }
 
   /* 
@@ -55,7 +70,6 @@ export class DataAnalyser {
         this.getExifByTag(photo.photo.exif, propKey)
       )
     }
-    console.log(exifArray)
     return exifArray
   }
 

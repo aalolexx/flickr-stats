@@ -24,6 +24,10 @@ export function showSummary(realName, camera, lense, fNumber, iso, exposureTime)
 }
 
 export function showUserHeader(realName, userName) {
-  $(cssClasses.header.realName).html(realName)
-  $(cssClasses.header.userName).html(userName)
+  if (realName) {
+    $(cssClasses.header.realName).html(realName)
+    $(cssClasses.header.userName).html(userName)
+  } else {
+    $(cssClasses.header.realName).html(userName)
+  }
 }
