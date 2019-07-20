@@ -1,7 +1,7 @@
 import { getUrlParameter, getUserId } from './utils.js'
 import { getUserPhotos, getPhotoExif, getUserInfo } from './restClient.js'
 import { DataAnalyser } from './dataAnalyser.js'
-import { updateLoadingBar, showSummary, showUserHeader, showRankingElement } from './ui.js'
+import { updateLoadingBar, showSummary, showUserHeader, showRankingProgressElement, showRankingLineChartElement } from './ui.js'
 
 let photos = []
 let user
@@ -70,29 +70,32 @@ function renderPhotoData () {
     dataHouse.getExposureTimeRanking().keys().next().value,
   )
 
-  showRankingElement(
+  showRankingProgressElement(
     '.js-camera-model-ranking',
     dataHouse.getCameraMakeRanking()
   )
 
-  showRankingElement(
+  showRankingProgressElement(
     '.js-lense-ranking',
     dataHouse.getLenseRanking()
   )
 
-  showRankingElement(
+  showRankingLineChartElement(
     '.js-fnumber-ranking',
-    dataHouse.getFNumberRanking()
+    dataHouse.getFNumberRanking(),
+    'F'
   )
 
-  showRankingElement(
+  showRankingLineChartElement(
     '.js-iso-ranking',
-    dataHouse.getIsoRanking()
+    dataHouse.getIsoRanking(),
+    'ISO'
   )
 
-  showRankingElement(
+  showRankingLineChartElement(
     '.js-exposure-time-ranking',
-    dataHouse.getExposureTimeRanking()
+    dataHouse.getExposureTimeRanking(),
+    's'
   )
 
   //console.log(user)

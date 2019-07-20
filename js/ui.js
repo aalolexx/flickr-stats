@@ -32,35 +32,158 @@ export function showUserHeader(realName, userName) {
   }
 }
 
-export function showRankingElement(containerClass, rankedMap) {
-  console.log(rankedMap)
+function prepareDataShowcaseElement(containerClass, rankedMap, keyPrefix = '') {
   let container = $(containerClass)
   container.append('<div class="ranking-keys"></div>')
   container.append('<div class="ranking-values"></div>')
 
   let rankingKeysContainer = container.find('.ranking-keys')
-  let rankingValuesContainer = container.find('.ranking-values')
+  let i = 0;
+  rankedMap.forEach((value, key) => {
+    if (i <= 8) {
+      rankingKeysContainer.append(`
+        <div class="ranking-key-row">
+          ${i == 0 ? '<strong>' : ''}<span>${keyPrefix} ${key}</span>${i == 0 ? '</strong>' : ''}
+        </div>
+      `)
+      
+    } else if (i == 9) {
+      rankingKeysContainer.append(`
+        <div class="ranking-key-row">
+          <span>...</span>
+        </div>
+      `)
+    } else {
+      return
+    }
+    i++
+  })
+}
 
-  let rankingLength = Array.from(rankedMap.values())
+export function showRankingProgressElement(containerClass, rankedMap, keyPrefix = '') {
+  prepareDataShowcaseElement(containerClass, rankedMap, keyPrefix)
+
+  let container = $(containerClass)
+  let rankingValuesContainer = container.find('.ranking-values')
+  let rankingLength = [...rankedMap.values()]
                             .reduce((prev, next) => prev + next)
   let i = 0;
   rankedMap.forEach((value, key) => {
-    rankingKeysContainer.append(`
-      <div class="ranking-key-row">
-        ${i == 0 ? '<strong>' : ''}<span>${key}</span>${i == 0 ? '</strong>' : ''}
-      </div>
-    `)
-    rankingValuesContainer.append(`
-      <div class="ranking-value-row">
-        <span class="ranking-value-label">${Math.round((value / rankingLength) * 100)}%</span>
-        <div class="ranking-value-progress">
-          <div class="progress-bar-wrapper">
-            <div class="progress-bar" style="width: ${(value / rankingLength) * 100}%"></div> 
+    if (i <= 8) {
+      rankingValuesContainer.append(`
+        <div class="ranking-value-row">
+          <span class="ranking-value-label">${Math.round((value / rankingLength) * 100)}%</span>
+          <div class="ranking-value-progress">
+            <div class="progress-bar-wrapper">
+              <div class="progress-bar" style="width: ${(value / rankingLength) * 100}%"></div> 
+            </div>
           </div>
         </div>
-      </div>
-    `)
+      `)
+    } else if (i == 9) {
+      rankingKeysContainer.append(`
+        <div class="ranking-key-row">
+          <span>...</span>
+        </div>
+      `)
+    } else {
+      return
+    }
+    i++
+  }) 
+}
+
+export function showRankingLineChartElement(containerClass, rankedMap, keyPrefix = '') {
+  prepareDataShowcaseElement(containerClass, rankedMap, keyPrefix)
+
+  let container = $(containerClass)
+  let rankingValuesContainer = container.find('.ranking-values')
+
+  rankingValuesContainer.append(`
+    <div class="ranking-value-row">
+      <canvas id="pie-chart-${containerClass.replace('.', '')}"></canvas>
+    </div>
+  `)
+
+  let keySortedMap = new Map([...rankedMap.entries()].sort())
+  let rankingLength = [...rankedMap.values()]
+                            .reduce((prev, next) => prev + next)
+
+  let mapKeys = []
+  let mapValues = []
+  let i = 0;
+  keySortedMap.forEach((value, key) => {
+    mapKeys.push(key)
+    mapValues.push((value / rankingLength) * 100)
     i++
   })
+
+  let ctx = document.getElementById('pie-chart-' + containerClass.replace('.', '')).getContext('2d')
+
+  let gradientLine = ctx.createLinearGradient(0, 0, 0, 250)
+  gradientLine.addColorStop(0, 'rgba(255,182,138,1)')
+  gradientLine.addColorStop(0.5, 'rgba(255,158,211,1)')
+  gradientLine.addColorStop(1, 'rgba(41,196,255,1)')
   
+
+  let chart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: mapKeys,
+        datasets: [{
+            label: '',
+            pointBorderColor: 'red',
+            pointBorderWidth: 2,
+            pointRadius: 4,
+            pointBorderColor: 'black',
+            pointHitRadius: 10,
+            backgroundColor: 'transparent',
+            borderColor: gradientLine,
+            borderWidth: 7,
+            data: mapValues
+        }]
+    },
+    options: {
+      layout: {
+        padding: {
+          top: 5
+        }
+      },
+      legend: {
+        display: false
+      },
+      scales: {
+        yAxes: [{
+          ticks: {
+            display: false
+             /*callback: function(value) {
+                return value + '%';
+             }*/
+          },
+          gridLines: {
+            display: false,
+            drawBorder: false,
+          }
+        }],
+        xAxes: [{
+          gridLines: {
+            display: false,
+            drawBorder: false,
+          },
+          ticks: {
+             callback: function(value) {
+                return keyPrefix + ' ' + value
+             }
+          },
+        }]
+      },
+      tooltips: {
+        callbacks: {
+          label: function(tooltipItems, data) { 
+              return Math.round(tooltipItems.yLabel)  + '%'
+          }
+        }
+      }
+    }
+  })
 }
