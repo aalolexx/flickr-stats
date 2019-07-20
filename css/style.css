@@ -36,6 +36,14 @@ body {
 .align-right {
   text-align: center; }
 
+.gradient-text, .data-quick-showcase span {
+  font-weight: bold;
+  color: #29c4ff;
+  background: linear-gradient(75.2deg, #29c4ff -2.5%, #ff9ed3 55%, #ffb68a 102.3%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; }
+
 .progress-bar, .progress-bar-wrapper {
   height: 1rem;
   border-radius: 1rem; }
@@ -63,13 +71,6 @@ body {
 .data-quick-showcase {
   font-size: 2rem;
   margin-bottom: 3rem; }
-  .data-quick-showcase span {
-    font-weight: bold;
-    color: #29c4ff;
-    background: linear-gradient(75.2deg, #29c4ff -2.5%, #ff9ed3 55%, #ffb68a 102.3%);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent; }
 
 .ranking-element {
   display: flex;

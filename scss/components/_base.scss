@@ -21,3 +21,12 @@ body {
 .align-right {
   text-align: center;
 }
+
+.gradient-text {
+  font-weight: bold;
+  color: $color-blue; // Fallback 
+  background: $primary-gradient;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

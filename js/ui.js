@@ -43,6 +43,7 @@ function prepareDataShowcaseElement(containerClass, rankedMap, keyPrefix = '') {
     if (i <= 8) {
       rankingKeysContainer.append(`
         <div class="ranking-key-row">
+          <strong class="gradient-text">#${i+1}</strong> 
           ${i == 0 ? '<strong>' : ''}<span>${keyPrefix} ${key}</span>${i == 0 ? '</strong>' : ''}
         </div>
       `)
@@ -134,19 +135,19 @@ export function showRankingLineChartElement(containerClass, rankedMap, keyPrefix
             label: '',
             pointBorderColor: 'red',
             pointBorderWidth: 2,
-            pointRadius: 4,
+            pointRadius: 6,
             pointBorderColor: 'black',
             pointHitRadius: 10,
             backgroundColor: 'transparent',
             borderColor: gradientLine,
-            borderWidth: 7,
+            borderWidth: 9,
             data: mapValues
         }]
     },
     options: {
       layout: {
         padding: {
-          top: 5
+          top: 10
         }
       },
       legend: {
