@@ -36,6 +36,21 @@ body {
 .align-right {
   text-align: center; }
 
+.progress-bar, .progress-bar-wrapper {
+  height: 1rem;
+  border-radius: 1rem; }
+
+.progress-bar-wrapper {
+  background-color: #eee; }
+
+.progress-bar {
+  background: linear-gradient(75.2deg, #29c4ff -2.5%, #ff9ed3 55%, #ffb68a 102.3%);
+  transition: 0.2s ease;
+  min-width: 5%; }
+
+.js-progress-bar {
+  width: 0%; }
+
 .header {
   margin-bottom: 3rem;
   transition: 0.3s ease; }
@@ -56,20 +71,24 @@ body {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent; }
 
+.ranking-element {
+  display: flex;
+  margin-bottom: 3rem; }
+  .ranking-element .ranking-keys, .ranking-element .ranking-values {
+    width: 50%;
+    margin: 0; }
+  .ranking-element .ranking-keys {
+    padding-right: 2rem; }
+  .ranking-element .ranking-value-row {
+    display: flex; }
+    .ranking-element .ranking-value-row .ranking-value-label {
+      width: 4em; }
+    .ranking-element .ranking-value-row .ranking-value-progress {
+      flex: 1; }
+
 .loading-container {
   width: 100%;
   max-width: 30rem;
   margin: auto;
   text-align: center;
   margin-top: 20vh; }
-  .loading-container .loading-bar, .loading-container .loading-bar-wrapper {
-    height: 1rem;
-    border-radius: 1rem; }
-  .loading-container .loading-bar-wrapper {
-    background-color: #eee; }
-  .loading-container .loading-bar {
-    background: linear-gradient(75.2deg, #29c4ff -2.5%, #ff9ed3 55%, #ffb68a 102.3%);
-    transition: 0.2s ease;
-    min-width: 5%; }
-  .loading-container .js-loading-bar {
-    width: 0%; }

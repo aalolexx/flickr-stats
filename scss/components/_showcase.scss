@@ -12,3 +12,29 @@
     -webkit-text-fill-color: transparent;
   }
 }
+
+.ranking-element {
+  display: flex;
+  margin-bottom: $components-spacing;
+
+  .ranking-keys, .ranking-values {
+    width: 50%;
+    margin: 0;
+  }
+
+  .ranking-keys {
+    padding-right: 2rem;
+  }
+
+  .ranking-value-row {
+    display: flex;
+
+    .ranking-value-label {
+      width: 4em;
+    }
+
+    .ranking-value-progress {
+      flex: 1;
+    }
+  }
+}

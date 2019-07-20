@@ -40,7 +40,12 @@ export async function getUserPhotos(userId) {
   return await getFromURL('flickr.people.getPhotos', [{
     key: 'user_id',
     value: userId
-  }])
+  },
+  {
+    key: 'per_page',
+    value: '500'
+  }
+])
 }
 
 export async function getUserInfo(userId) {

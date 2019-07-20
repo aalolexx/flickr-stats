@@ -1,7 +1,7 @@
 import { getUrlParameter, getUserId } from './utils.js'
 import { getUserPhotos, getPhotoExif, getUserInfo } from './restClient.js'
 import { DataAnalyser } from './dataAnalyser.js'
-import { updateLoadingBar, showSummary, showUserHeader } from './ui.js'
+import { updateLoadingBar, showSummary, showUserHeader, showRankingElement } from './ui.js'
 
 let photos = []
 let user
@@ -35,13 +35,10 @@ async function processPhotos (userId) {
   let i = 0; 
   for (let photo of photosResponse.photos.photo) {
     i++;
-    console.log(`get photo ${i} / ${photosResponse.photos.photo.length}`)
     updateLoadingBar(i, photosResponse.photos.photo.length)
     let enrichedPhoto = await getPhotoExif(photo.id)
     photos.push(enrichedPhoto)
   }
-
-  console.log(photos)
 }
 
 async function processUser (userId) {
@@ -72,22 +69,50 @@ function renderPhotoData () {
     dataHouse.getIsoRanking().keys().next().value,
     dataHouse.getExposureTimeRanking().keys().next().value,
   )
-  console.log(user)
+
+  showRankingElement(
+    '.js-camera-model-ranking',
+    dataHouse.getCameraMakeRanking()
+  )
+
+  showRankingElement(
+    '.js-lense-ranking',
+    dataHouse.getLenseRanking()
+  )
+
+  showRankingElement(
+    '.js-fnumber-ranking',
+    dataHouse.getFNumberRanking()
+  )
+
+  showRankingElement(
+    '.js-iso-ranking',
+    dataHouse.getIsoRanking()
+  )
+
+  showRankingElement(
+    '.js-exposure-time-ranking',
+    dataHouse.getExposureTimeRanking()
+  )
+
+  //console.log(user)
   
-  console.log('lense:')
-  console.log(dataHouse.getLenseRanking())
-  console.log('camera model:')
-  console.log(dataHouse.getCameraModelRanking())
-  console.log('camera brand:')
-  console.log(dataHouse.getCameraMakeRanking())
-  console.log('iso:')
-  console.log(dataHouse.getIsoRanking())
-  console.log('exposure time:')
-  console.log(dataHouse.getExposureTimeRanking())
-  console.log('f number:')
-  console.log(dataHouse.getFNumberRanking())
-  console.log('focal length:')
-  console.log(dataHouse.getFocalLengthRanking())
+  //console.log('lense:')
+  //console.log(dataHouse.getLenseRanking())
+  //console.log('camera model:')
+  //console.log(dataHouse.getCameraModelRanking())
+  //console.log('camera brand:')
+  //console.log(dataHouse.getCameraMakeRanking())
+  //console.log('iso:')
+  //console.log(dataHouse.getIsoRanking())
+  //console.log('exposure time:')
+  //console.log(dataHouse.getExposureTimeRanking())
+  //console.log('f number:')
+  //console.log(dataHouse.getFNumberRanking())
+  //console.log('focal length:')
+  //console.log(dataHouse.getFocalLengthRanking())
 }
 
-initAnalysis()
+$(document).ready(function() {
+  initAnalysis()
+})
