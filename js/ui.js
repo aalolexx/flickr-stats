@@ -106,17 +106,27 @@ export function showRankingLineChartElement(containerClass, rankedMap, keyPrefix
     </div>
   `)
 
-  let keySortedMap = new Map([...rankedMap.entries()].sort())
   let rankingLength = [...rankedMap.values()]
                             .reduce((prev, next) => prev + next)
 
   let mapKeys = []
   let mapValues = []
-  let i = 0;
-  keySortedMap.forEach((value, key) => {
-    mapKeys.push(key)
-    mapValues.push((value / rankingLength) * 100)
-    i++
+  let mapObject = []
+
+  rankedMap.forEach((value, key) => {
+    mapObject.push({
+      'key': key,
+      'value': (value / rankingLength) * 100
+    })    
+  })
+
+  mapObject.sort((a,b) => {
+    return a.key - b.key
+  })
+
+  mapObject.forEach(item => {
+    mapKeys.push(item.key)
+    mapValues.push(item.value)
   })
 
   let ctx = document.getElementById('pie-chart-' + containerClass.replace('.', '')).getContext('2d')
