@@ -21,6 +21,9 @@ body {
   margin: 0;
   padding: 0; }
 
+* {
+  box-sizing: border-box; }
+
 .container {
   max-width: 1000px;
   margin: auto;
@@ -129,6 +132,16 @@ button {
       width: 4em; }
     .ranking-element .ranking-value-row .ranking-value-progress {
       flex: 1; }
+  @media screen and (max-width: 800px) {
+    .ranking-element {
+      flex-wrap: wrap;
+      flex-direction: column-reverse; }
+      .ranking-element .ranking-keys, .ranking-element .ranking-values {
+        width: 100%;
+        margin: 0;
+        margin-bottom: 1.5rem; }
+        .ranking-element .ranking-keys:last-child, .ranking-element .ranking-values:last-child {
+          margin-bottom: 0; } }
 
 .loading-container {
   width: 100%;
