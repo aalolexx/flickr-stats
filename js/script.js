@@ -35,7 +35,6 @@ async function processPhotos (userId) {
   let i = 0; 
   for (let photo of photosResponse.photos.photo) {
     i++
-    if (i > 10) break 
     updateLoadingBar(i, photosResponse.photos.photo.length)
     let enrichedPhoto = await getPhotoExif(photo.id)
     photos.push(enrichedPhoto)
