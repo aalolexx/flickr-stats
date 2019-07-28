@@ -37,20 +37,38 @@ export async function getPhotoExif(photoId) {
  * @param {*} userId 
  */
 export async function getUserPhotos(userId) {
-  return await getFromURL('flickr.people.getPhotos', [{
+  return await getFromURL('flickr.people.getPhotos', [
+    {
     key: 'user_id',
     value: userId
-  },
-  {
-    key: 'per_page',
-    value: '500'
-  }
-])
+    },
+    {
+      key: 'per_page',
+      value: '500'
+    }
+  ])
 }
 
+/**
+ * Get User object by ID
+ * @param {*} userId 
+ */
 export async function getUserInfo(userId) {
   return await getFromURL('flickr.people.getInfo', [{
     key: 'user_id',
     value: userId
   }])
 } 
+
+/**
+ * Get User Id by User Email
+ * @param {*} email 
+ */
+export async function getUserIdByUsername(name) {
+  return await getFromURL('flickr.people.findByUsername', [
+    {
+      key: 'username',
+      value: name
+    }
+  ])
+}

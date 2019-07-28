@@ -23,7 +23,8 @@ body {
 
 .container {
   max-width: 1000px;
-  margin: auto; }
+  margin: auto;
+  padding: 1em; }
 
 .hidden {
   display: none; }
@@ -37,6 +38,35 @@ body {
 .align-right {
   text-align: center; }
 
+/* Elements */
+.chip {
+  font-size: 0.5em;
+  border-radius: 1em;
+  padding: 0 0.5em; }
+
+input {
+  padding: 0.5em;
+  padding-left: 0;
+  border: 0;
+  border-bottom: 3px solid black;
+  font-size: 1em;
+  transition: 0.3s all ease; }
+  input:focus {
+    padding-left: 0.5em; }
+
+button {
+  padding: 0.5em 1em;
+  border: 3px solid black;
+  font-size: 1em;
+  font-weight: bold;
+  background-color: white;
+  transition: 0.3s all ease; }
+  button:hover {
+    cursor: pointer;
+    color: black !important;
+    box-shadow: 0px 10px 34px 0px rgba(0, 0, 0, 0.32); }
+
+/* Gradients */
 .gradient-text, .data-quick-showcase span {
   font-weight: bold;
   color: #29c4ff;
@@ -44,6 +74,11 @@ body {
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent; }
+
+.gradient-background, button:hover {
+  font-weight: bold;
+  color: white;
+  background: linear-gradient(75.2deg, #29c4ff -2.5%, #ff9ed3 55%, #ffb68a 102.3%); }
 
 .progress-bar, .progress-bar-wrapper {
   height: 1rem;
@@ -59,6 +94,13 @@ body {
 
 .js-progress-bar {
   width: 0%; }
+
+.start-title {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 0; }
+  .start-title .chip {
+    margin-left: 1rem; }
 
 .header {
   margin-bottom: 3rem;

@@ -1,10 +1,31 @@
-import { getUrlParameter, getUserId } from './utils.js'
-import { getUserPhotos, getPhotoExif, getUserInfo } from './restClient.js'
+import { getUrlParameter, getUserId, setUserId } from './utils.js'
+import { getUserPhotos, getPhotoExif, getUserInfo, getUserIdByUsername } from './restClient.js'
 import { DataAnalyser } from './dataAnalyser.js'
 import { updateLoadingBar, showSummary, showUserHeader, showRankingProgressElement, showRankingLineChartElement } from './ui.js'
 
 let photos = []
 let user
+
+$(document).ready(function() {
+  $('.js-email-button').click(function() {
+    processUserSearch($('.js-username-input').val())
+  })
+
+  if (getUserId()) {
+    initAnalysis()
+  }
+})
+
+async function processUserSearch(username) {
+  let response = await getUserIdByUsername(username)
+  console.log(response)
+  if (response.stat == 'fail') {
+    alert('no user found with the name "' + username + '"')
+  } else {
+    setUserId(response.user.id)
+    initAnalysis()
+  }
+}
 
 async function initAnalysis() {
   let userId = getUserId()
@@ -15,12 +36,22 @@ async function initAnalysis() {
 
   await processUser(userId)
 
-  await processPhotos(userId)
-  renderPhotoData()
+  $('.js-start-section').addClass('hidden')
+  $('.loading-container').removeClass('hidden')
 
-  $('.loading-container').addClass('hidden')
-  $('.header').toggleClass('align-center', 'align-left')
-  $('.container').removeClass('hidden')
+  await processPhotos(userId)
+
+  if (photos.length > 0) {
+    renderPhotoData()
+
+    $('.loading-container').addClass('hidden')
+    $('.header').toggleClass('align-center', 'align-left')
+    $('.js-main-section').removeClass('hidden')
+  } else {
+    $('.loading-container').addClass('hidden')
+    $('.js-start-section').removeClass('hidden')
+    alert('Sorry! We couldn\'t get the photos of the requested user.')
+  }
 }
 
 /* 
@@ -116,6 +147,6 @@ function renderPhotoData () {
   //console.log(dataHouse.getFocalLengthRanking())
 }
 
-$(document).ready(function() {
-  initAnalysis()
-})
+//$(document).ready(function() {
+//  initAnalysis()
+//})

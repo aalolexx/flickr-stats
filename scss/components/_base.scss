@@ -6,6 +6,7 @@ body {
 .container {
   max-width: $container-max-width;
   margin: auto;
+  padding: 1em;
 }
 
 .hidden {
@@ -22,6 +23,44 @@ body {
   text-align: center;
 }
 
+/* Elements */
+.chip {
+  font-size: 0.5em;
+  border-radius: 1em;
+  padding: 0 0.5em;
+}
+
+input {
+  padding: 0.5em;
+  padding-left: 0;
+  border: 0;
+  border-bottom: 3px solid black;
+  font-size: 1em;
+  transition: 0.3s all ease;
+
+  &:focus {
+    padding-left: 0.5em;
+  }
+
+}
+
+button {
+  padding: 0.5em 1em;
+  border: 3px solid black;
+  font-size: 1em;
+  font-weight: bold;
+  background-color: white;
+  transition: 0.3s all ease;
+
+  &:hover {
+    @extend .gradient-background;
+    cursor: pointer;
+    color: black !important;
+    box-shadow: $hover-shadow;
+  }
+}
+
+/* Gradients */
 .gradient-text {
   font-weight: bold;
   color: $color-blue; // Fallback 
@@ -29,4 +68,10 @@ body {
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+.gradient-background {
+  font-weight: bold;
+  color: white;
+  background: $primary-gradient;
 }

@@ -14,14 +14,23 @@
 
 <body>
 
-  <div class="loading-container">
+  <div class="container js-start-section">
+    <h1 class="start-title">Flickr Stats!<span class="chip gradient-background">beta</span></h1>
+    <h3>The Web App that shows you what gear and settings a flickr photographer is using.</h3>
+    <div class="search-container">
+      <input type="text" class="js-username-input" placeholder="username" />
+      <button class="js-email-button">go!</button>
+    </div>
+  </div>
+
+  <div class="loading-container hidden">
     <p class="js-loading-message"></p>
     <div class="progress-bar-wrapper">
       <div class="progress-bar js-progress-bar"></div> 
     </div>
   </div>
 
-  <div class="container hidden">
+  <div class="container hidden js-main-section">
     
     <div class="header align-center">
       <h1 class="js-user-full-name"></h1>

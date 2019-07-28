@@ -62,6 +62,9 @@ function prepareDataShowcaseElement(containerClass, rankedMap, keyPrefix = '') {
 }
 
 export function showRankingProgressElement(containerClass, rankedMap, keyPrefix = '') {
+  if (rankedMap.size < 1) return
+  console.log(rankedMap)
+
   prepareDataShowcaseElement(containerClass, rankedMap, keyPrefix)
 
   let container = $(containerClass)
@@ -95,6 +98,8 @@ export function showRankingProgressElement(containerClass, rankedMap, keyPrefix 
 }
 
 export function showRankingLineChartElement(containerClass, rankedMap, keyPrefix = '') {
+  if (rankedMap.size < 1) return
+
   prepareDataShowcaseElement(containerClass, rankedMap, keyPrefix)
 
   let container = $(containerClass)
@@ -120,8 +125,9 @@ export function showRankingLineChartElement(containerClass, rankedMap, keyPrefix
     })    
   })
 
+  // Create new function to "calculate" value from key, eg. Exposure Time 1/300
   mapObject.sort((a,b) => {
-    return a.key - b.key
+    return (new Function('return ' + a.key)()) - (new Function('return ' + b.key)())
   })
 
   mapObject.forEach(item => {
